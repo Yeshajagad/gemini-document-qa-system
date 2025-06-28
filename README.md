@@ -1,11 +1,8 @@
-# gemini-document-qa-system
-An intelligent document-based question answering system powered by Google Gemini API. Upload documents, ask questions, and get precise answers with source citations.
-
 # Gemini Document QA System
 
 An intelligent document-based question answering system powered by Google Gemini API. Upload documents, ask questions, and get precise answers with source citations.
 
-## 🚀 Features
+## Features
 
 - **Smart Document Processing** - Supports PDF, TXT, and DOCX files
 - **AI-Powered Search** - Uses Gemini embeddings for semantic retrieval
@@ -13,7 +10,7 @@ An intelligent document-based question answering system powered by Google Gemini
 - **Modern UI** - Clean and responsive web interface
 - **Fast Retrieval** - Vector-based similarity search with FAISS
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **AI Model**: Google Gemini Pro API
 - **Backend**: Python, FastAPI
@@ -21,7 +18,7 @@ An intelligent document-based question answering system powered by Google Gemini
 - **Frontend**: HTML/CSS/JavaScript
 - **Document Processing**: PyPDF2, python-docx
 
-## ⚡ Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.8+
@@ -57,7 +54,7 @@ http://localhost:8000
 2. Ask questions about the content
 3. Get AI-generated answers with sources
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 ├── app.py
@@ -68,7 +65,7 @@ http://localhost:8000
 
 ```
 
-## 🔧 Configuration
+##  Configuration
 
 Create `.env` file:
 ```env
@@ -77,7 +74,7 @@ MAX_FILE_SIZE=10MB
 EMBEDDING_MODEL=models/embedding-001
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create feature branch (`git checkout -b feature/new-feature`)
@@ -85,7 +82,7 @@ EMBEDDING_MODEL=models/embedding-001
 4. Push to branch (`git push origin feature/new-feature`)
 5. Open Pull Request
 
-## 📄 License
+##  License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
