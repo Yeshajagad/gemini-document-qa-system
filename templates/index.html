@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Retrieval System</title>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #1b1b1b;
+        color: #f1f1f1;
+        transition: background-color 0.4s, color 0.4s;
+    }
+
+    body.dark {
+        background-color: #f3f3f3;
+        color: #1b1b1b;
+    }
+
+    .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        top: 0; left: 0;
+        right: 0; bottom: 0;
+        background-color: #ccc;
+        border-radius: 26px;
+        transition: 0.4s;
+        cursor: pointer;
+    }
+
+    .slider:before {
+        content: "";
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        border-radius: 50%;
+        transition: 0.4s;
+    }
+
+    input:checked + .slider {
+        background-color: #5B4629;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(24px);
+    }
+
+    .container {
+        background-color: #f7f4ec;
+        color: #2a2a2a;
+        max-width: 800px;
+        margin: 80px auto 40px;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        transition: background-color 0.4s, color 0.4s;
+    }
+
+    body.dark .container {
+        background-color: #242424;
+        color: #f1f1f1;
+    }
+
+    .container h1 {
+        font-size: 2.2em;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #5B4629;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 8px;
+        color: #5B4629;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid #ccc09a;
+        font-size: 1em;
+        font-family: inherit;
+        resize: vertical;
+        background-color: #fff8e6;
+        color: #2f2f2f;
+        transition: all 0.3s;
+    }
+
+    textarea:focus {
+        outline: none;
+        border-color: #5B4629;
+        box-shadow: 0 0 4px #5B4629aa;
+    }
+
+    .submit-btn {
+        margin-top: 15px;
+        padding: 14px 28px;
+        background-color: #5B4629;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #3d2f1c;
+        box-shadow: 0 6px 16px rgba(91, 70, 41, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .output {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #1c1c1c;
+        color: #f1f1f1;
+        border-left: 6px solid #5B4629;
+        border-radius: 10px;
+    }
+
+    .output h3 {
+        margin-top: 0;
+        color: #e3cb99;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+
+    .output.error {
+        background-color: #300f0f;
+        border-color: #ff5555;
+        color: #ffdddd;
+    }
+
+    .output.error h3 {
+        color: #ff7979;
+    }
+
+    .status {
+        margin-top: 30px;
+        padding: 12px;
+        background-color: #fff8e0;
+        color: #5B4629;
+        border-left: 5px solid #C9BD94;
+        border-radius: 8px;
+        font-size: 0.95em;
+    }
+
+    body.dark .output {
+        background-color: #f3f3f3;
+        color: #1c1c1c;
+    }
+
+    body.dark .output.error {
+        background-color: #ffe5e5;
+        color: #9f2b2b;
+        border-color: #cc2a2a;
+    }
+
+    body.dark .status {
+        background-color: #fff1c5;
+        color: #2f2f2f;
+    }
+
+    #app-title {
+    color: #bc7a00; 
+    }
+
+    #app-subtitle {
+    color: #c7a463; 
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 20px;
+            margin-top: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+        }
+
+        textarea {
+            font-size: 1em;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle">
+        <label class="switch">
+            <input type="checkbox" id="modeToggle">
+            <span class="slider round"></span>
+        </label>
+        <span id="modeLabel">Dark Mode</span>
+    </div>
+
+    <div class="container">
+        <h1 id="app-title">Document-Based Question Answering</h1>
+        
+        <form method="POST" id="queryForm">
+            <div class="form-group">
+                <label for="query" id="app-subtitle" >Enter your query:</label>
+                <textarea 
+                    name="query" 
+                    id="query" 
+                    rows="4" 
+                    required 
+                    placeholder="Ask any question about the documents... For example: 'What is machine learning?' or 'Who was the first person on the moon?'"
+                >{{ query if query else '' }}</textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                 Get Answer
+            </button>
+        </form>
+
+        {% if result %}
+        <div class="output {% if 'Error' in result or 'error' in result %}error{% endif %}">
+            <h3>
+                {% if 'Error' in result or 'error' in result %}
+                    ❌ Error
+                {% else %}
+                    ✅ Answer Found
+                {% endif %}
+            </h3>
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+        
+        <div class="status">
+             Tip: Make sure you have .txt files in your 'docs' folder for best results
+        </div>
+    </div>
+
+    <script>
+
+        const toggle = document.getElementById('modeToggle');
+        const body = document.body;
+        const label = document.getElementById('modeLabel');
+
+        toggle.addEventListener('change', () => {
+            body.classList.toggle('dark');
+            label.textContent = body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+        });
+        const form = document.getElementById('queryForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const originalBtnText = submitBtn.innerHTML;
+
+        form.addEventListener('submit', function () {
+        submitBtn.innerHTML = ' Processing...';
+        submitBtn.disabled = true;
+});
+
+window.addEventListener('load', function () {
+    submitBtn.innerHTML = originalBtnText;
+    submitBtn.disabled = false;
+});
+
+    </script>
+</body>
+</html>

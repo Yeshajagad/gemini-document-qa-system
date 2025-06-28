@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #5B4629 0%, #C9BD94 100%);
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh;
+    color: #2f2f2f;
+}
+
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid #C9BD94;
+}
+
+h1 {
+    text-align: center;
+    color: #5B4629;
+    margin-bottom: 30px;
+    font-size: 2.4em;
+    font-weight: 400;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 600;
+    color: #5B4629;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #C9BD94;
+    border-radius: 10px;
+    resize: vertical;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fdfcf8;
+}
+
+textarea:focus {
+    border-color: #5B4629;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(91, 70, 41, 0.2);
+}
+
+.submit-btn {
+    padding: 14px 28px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #5B4629, #C9BD94);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(91, 70, 41, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.output {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fcf9f2;
+    border-left: 6px solid #5B4629;
+    border-radius: 0 10px 10px 0;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.output h3 {
+    margin-top: 0;
+    color: #5B4629;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+
+.output p {
+    line-height: 1.8;
+    color: #333;
+    font-size: 1.05em;
+}
+
+.error {
+    border-left-color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.error h3 {
+    color: #dc3545;
+}
+
+.status {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95em;
+    color: #555;
+    background: #f3f0e5;
+    padding: 10px;
+    border-radius: 10px;
+}
