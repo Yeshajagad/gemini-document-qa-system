@@ -13,7 +13,7 @@ An intelligent document-based question answering system powered by Google Gemini
 ## Tech Stack
 
 - **AI Model**: Google Gemini Pro API
-- **Backend**: Python, FastAPI
+- **Backend**: Python,Flask
 - **Embeddings**: Gemini Embeddings + FAISS
 - **Frontend**: HTML/CSS/JavaScript
 - **Document Processing**: PyPDF2, python-docx
